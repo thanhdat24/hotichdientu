@@ -1,0 +1,5 @@
+{
+  "name": "Hộ Tịch Dashboard",
+  "description": "Dashboard thống kê dữ liệu đăng ký hộ tịch, khai sinh, kết hôn từ API Moj",
+  "requestFramePermissions": []
+}
