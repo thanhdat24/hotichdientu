@@ -100,11 +100,34 @@ const App: React.FC = () => {
   const totalRecords = useMemo(() => stats.reduce((acc, curr) => acc + curr.count, 0), [stats]);
 
   const chartData = useMemo(() => {
-    return stats.map(s => ({
-      name: s.label.replace('Đăng ký ', '').replace('việc ', ''),
-      fullLabel: s.label,
-      value: s.count
-    }));
+    return stats.map(s => {
+      let name = s.label;
+      // Shorten logic
+      if (name.startsWith('Đăng ký ')) name = name.replace('Đăng ký ', '');
+      if (name.startsWith('Việc ')) name = name.replace('Việc ', '');
+      
+      // Custom mapping for long labels
+      const map: Record<string, string> = {
+        'Cấp bản sao trích lục': 'Bản sao TL',
+        'giám sát việc giám hộ': 'Giám sát GH',
+        'ly hôn, hủy việc kết hôn ở nước ngoài': 'Ly hôn/Hủy KH NN',
+        'Cấp văn bản xác nhận thông tin hộ tịch': 'Xác nhận TTHT',
+        'thay đổi/bổ sung/cải chính': 'Thay đổi/Cải chính',
+        'nhận cha, mẹ, con': 'Nhận cha mẹ con'
+      };
+
+      if (map[name]) {
+        name = map[name];
+      } else if (map[s.label]) {
+        name = map[s.label];
+      }
+
+      return {
+        name: name.charAt(0).toUpperCase() + name.slice(1), // Capitalize first letter
+        fullLabel: s.label,
+        value: s.count
+      };
+    });
   }, [stats]);
 
   // Chart Colors based on Theme
@@ -281,15 +304,19 @@ const App: React.FC = () => {
         {/* Charts Section */}
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
           <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-6">Biểu Đồ Phân Bố Hồ Sơ</h2>
-          <div className="h-80 w-full">
+          <div className="h-96 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+              <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={chartGridColor} />
                 <XAxis 
                   dataKey="name" 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: chartAxisColor, fontSize: 12 }}
+                  tick={{ fill: chartAxisColor, fontSize: 11 }}
+                  interval={0}
+                  angle={-25}
+                  textAnchor="end"
+                  height={80}
                   dy={10}
                 />
                 <YAxis 
@@ -308,8 +335,15 @@ const App: React.FC = () => {
                   }}
                   itemStyle={{ color: tooltipText }}
                   formatter={(value: number) => [value.toLocaleString('vi-VN'), 'Hồ sơ']}
+                  labelStyle={{ fontWeight: 'bold', marginBottom: '4px', color: chartAxisColor }}
+                  labelFormatter={(label, payload) => {
+                     if (payload && payload.length > 0) {
+                        return payload[0].payload.fullLabel;
+                     }
+                     return label;
+                  }}
                 />
-                <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={60}>
+                <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={50}>
                   {chartData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
