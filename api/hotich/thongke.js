@@ -111,6 +111,57 @@ export default async function handler(req, res) {
         isApprove: true,
       },
     },
+	"Đăng ký nhận con nuôi": {
+      url: "https://hotichdientu.moj.gov.vn/v1/child-adoption-registration/search?page=0&size=10&sort=id,DESC",
+      body: {
+        field: "CHO_PHE_DUYET"
+      },
+    },
+	"Việc ly hôn, hủy việc kết hôn ở nước ngoài": {
+      url: "https://hotichdientu.moj.gov.vn/v1/foreign-divorce/cancel-marriage/search-approve-publish?page=0&size=10&sort=id,DESC",
+      body: {
+        searchKey: "",
+        registrationDate: [],
+        signStatus: null,
+        bookNoId: null,
+        childBirthDate: "",
+        parentBirthDate: "",
+        spFullName: "",
+        lastUpdated: 1762446648483,
+        isApprove: true,
+      },
+    },
+	"Cấp văn bản xác nhận thông tin hộ tịch": {
+      url: "https://hotichdientu.moj.gov.vn/v1/civil-confirmation/search-approve-publish?page=0&size=10&sort=id,DESC",
+      body: {
+    "searchKey": "",
+    "registrationDate": [],
+    "status": 5,
+    "signStatus": null,
+    "spIdentifyNo": "",
+    "numberNo": "",
+    "cfIdentifyNo": "",
+    "manageDepartment": "1003194",
+    "isApprove": true
+	},
+    },
+		"Đăng ký thay đổi/bổ sung/cải chính": {
+      url: "https://hotichdientu.moj.gov.vn/v1/correction_civil/search-approve-publish?page=0&size=10&sort=objectId,DESC",
+      body: {
+    "searchKey": "",
+    "registrationDate": [],
+    "manageDepartment": "1003194",
+    "statusList": [],
+    "signStatus": null,
+    "numberNo": null,
+    "bookNoId": null,
+    "spFullName": null,
+    "type": null,
+    "objectType": null,
+    "lastUpdated": 1765676723967,
+    "isApprove": true
+	}
+    },
   };
 
   // Timeout helper (tránh treo request)
