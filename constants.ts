@@ -13,13 +13,13 @@ export const DEFAULT_API_BASE_URL = "";
  */
 export const ENDPOINT_LABELS = [
   "Đăng ký khai sinh",
-  "Đăng ký khai tử",
   "Đăng ký kết hôn",
+  "Đăng ký khai tử",
+  "Cấp bản sao trích lục",
   "XNTT Hôn nhân",
   "Đăng ký giám hộ",
   "Đăng ký giám sát việc giám hộ",
-  "Đăng ký nhận cha, mẹ, con",
-  "Cấp bản sao trích lục"
+  "Đăng ký nhận cha, mẹ, con"
 ] as const;
 
 /**
@@ -27,13 +27,13 @@ export const ENDPOINT_LABELS = [
  */
 export const ICON_MAP: Record<string, any> = {
   "Đăng ký khai sinh": Baby,
+   "Đăng ký kết hôn": Heart,
   "Đăng ký khai tử": FileText,
-  "Đăng ký kết hôn": Heart,
+  "Cấp bản sao trích lục": Files,
   "XNTT Hôn nhân": Shield,
   "Đăng ký giám hộ": ShieldCheck,
   "Đăng ký giám sát việc giám hộ": Users,
-  "Đăng ký nhận cha, mẹ, con": UserPlus,
-  "Cấp bản sao trích lục": Files
+  "Đăng ký nhận cha, mẹ, con": UserPlus
 };
 
 /**

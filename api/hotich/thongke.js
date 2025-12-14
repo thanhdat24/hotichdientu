@@ -36,13 +36,26 @@ export default async function handler(req, res) {
         isApprove: true,
       },
     },
+	"Đăng ký kết hôn": {
+      url: "https://hotichdientu.moj.gov.vn/v1/marriage/search-approve-publish?page=0&size=10&sort=id,DESC",
+      body: { searchKey: "", registrationDate: [], bookNoId: null, isApprove: true },
+    },
     "Đăng ký khai tử": {
       url: "https://hotichdientu.moj.gov.vn/v1/death/search-approve-publish?page=0&size=10&sort=id,DESC",
       body: { searchKey: "", registrationDate: [], bookNoId: null, isApprove: true },
     },
-    "Đăng ký kết hôn": {
-      url: "https://hotichdientu.moj.gov.vn/v1/marriage/search-approve-publish?page=0&size=10&sort=id,DESC",
-      body: { searchKey: "", registrationDate: [], bookNoId: null, isApprove: true },
+	    "Cấp bản sao trích lục": {
+      url: "https://hotichdientu.moj.gov.vn/v1/guardianship/search-approve-publish?page=0&size=10&sort=id,DESC",
+      body: {
+        searchKey: "",
+        registrationDate: [],
+        signStatus: null,
+        guardianBirthDate: null,
+        dependentBirthDate: null,
+        spFullName: "",
+        type: null,
+        isApprove: true,
+      },
     },
     "XNTT Hôn nhân": {
       url: "https://hotichdientu.moj.gov.vn/v1/marital/search-approve-publish?page=0&size=10&sort=id,DESC",
@@ -95,19 +108,6 @@ export default async function handler(req, res) {
         parentBirthDate: "",
         spFullName: "",
         lastUpdated: 1762446648483,
-        isApprove: true,
-      },
-    },
-    "Cấp bản sao trích lục": {
-      url: "https://hotichdientu.moj.gov.vn/v1/guardianship/search-approve-publish?page=0&size=10&sort=id,DESC",
-      body: {
-        searchKey: "",
-        registrationDate: [],
-        signStatus: null,
-        guardianBirthDate: null,
-        dependentBirthDate: null,
-        spFullName: "",
-        type: null,
         isApprove: true,
       },
     },
